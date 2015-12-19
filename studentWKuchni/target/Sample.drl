@@ -11,8 +11,8 @@ import com.sample.FinalWindow;
 
 
 rule "skladniki"
-	salience 100
-	when d: Dish( czyAtrybutJest("skladniki") )
+	salience 11
+	when d: Dish(!attributeExist("skladniki"))
 	then
 		Window w = new Window(d, "Jakie masz dostêpne produkty?", "skladniki", "check", 
 		new String[] 
@@ -26,19 +26,46 @@ rule "skladniki"
 end 
 
 
-rule "styl_pracy"
-	salience 9
-	when d: Dish( czyAtrybutJest("stylPracy") )
+rule "pora"
+	salience 10
+	when d: Dish( !attributeExist("pora") )
 	then
-		Window w = new Window(d, "Jaki styl pracy preferujesz?", "stylPracy", "radio", new String[] {"biurowy", "fizyczny", "inny"});
+		Window w = new Window(d, "Co chcesz zjeœæ?", "pora", "radio", new String[] {"œniadanie", "obiad", "kolacje"});
 		update(w.d);
 end
+
+rule "cieplo_zimno"
+	salience 10
+	when d: Dish( !attributeExist("cieplo_zimno") )
+	then
+		Window w = new Window(d, "Chcesz danie na ciep³o czy na zimno?", "cieplo_zimno", "radio", new String[] {"ciep³o", "zimno"});
+		update(w.d);
+end
+
+rule "smak"
+	salience 10
+	when d: Dish( !attributeExist("smak") )
+	then
+		Window w = new Window(d, "Jaki smak preferujesz?", "smak", "radio", new String[] {"s³odki", "s³ony", "gorzki","kwaœny"});
+		update(w.d);
+end
+
+rule "sprzet"
+	salience 10
+	when d: Dish( !attributeExist("sprzet") )
+	then
+		Window w = new Window(d, "Co z wymienionych rzeczy masz do dyspozycji?", "sprzet", "check", 
+		new String[] {"kuchenka", "grill", "piekarnik", "mikrofalówka", "garnek", "patelnia",
+		"toster"});
+		update(w.d);
+end
+
 
 //warunkowe:
 
 rule "pieniadze"
 	salience 10
-	when d: Dish( czyAtrybutJest("pieniadze") && czyArgumentJest("dzialalnosc", "tak") )
+	when d: Dish( attributeExist("pieniadze") && attributeContain("dzialalnosc", "tak") )
 	then
 		Window w = new Window(d, "Czy mozesz zainwestowac pieniadze?", "pieniadze", "radio", new String[] {"tak", "nie"});
 		update(w.d);
@@ -48,7 +75,7 @@ end
 
 rule "wynik_wlasciciel_sklepu"
 	salience 1
-	when d: Dish( czyArgumentJest("zylka_handlowca", "tak") && czyArgumentJest("dzialalnosc", "tak") && czyArgumentJest("pieniadze", "tak"))
+	when d: Dish( attributeContain("zylka_handlowca", "tak") && attributeContain("dzialalnosc", "tak") && attributeContain("pieniadze", "tak"))
 	then
 		new FinalWindow("Zawod wybrany dla ciebie to wlasciciel sklepu!");
 end

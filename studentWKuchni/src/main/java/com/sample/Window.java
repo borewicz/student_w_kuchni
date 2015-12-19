@@ -124,30 +124,30 @@ public class Window extends JFrame implements ActionListener {
 
 		if (source == submitButton) {
 
-			boolean czyCosWybrano = false;
-
-			ArrayList<String> readyToSendList = new ArrayList<String>();
+			boolean optionSelected = false;
+			HashSet<String> attributesSet = new HashSet<String>();
+			
 			switch (this.formType) {
 			case "radio":
 				for (int i = 0; i < this.numberOfAnswers; i++) {
 					if (tabRadio[i].isSelected()) {
-						readyToSendList.add(tabRadio[i].getText());
-						czyCosWybrano = true;
+						attributesSet.add(tabRadio[i].getText());
+						optionSelected = true;
 					}
 				}
 				break;
 			case "check":
 				for (int i = 0; i < this.numberOfAnswers; i++) {
 					if (tabCheck[i].isSelected()) {
-						readyToSendList.add(tabCheck[i].getText());
-						czyCosWybrano = true;
+						attributesSet.add(tabCheck[i].getText());
+						optionSelected = true;
 					}
 				}
 				break;
 			}
 
-			if (czyCosWybrano) {
-				d.attributes.put(this.getattribute(), readyToSendList);
+			if (optionSelected) {
+				d.attributes.put(this.getattribute(), attributesSet);
 
 				setVisible(false);
 				dataAvailable.release();
