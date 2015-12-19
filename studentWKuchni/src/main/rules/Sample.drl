@@ -1,0 +1,395 @@
+package com.sample
+ 
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.sample.Osoba;
+import com.sample.Window;
+import com.sample.FinalWindow;
+
+
+rule "prawo_jazdy"
+	salience 10
+	when o: Osoba( czyAtrybutJest("prawoJazdy") )
+	then
+		Window w = new Window(o, "Jakiej kategorii prawa jazdy posiadasz?", "prawoJazdy", "check", new String[] {"A", "B", "C+E", "zadne"});
+		update(w.o);
+end 
+
+
+rule "styl_pracy"
+	salience 9
+	when o: Osoba( czyAtrybutJest("stylPracy") )
+	then
+		Window w = new Window(o, "Jaki styl pracy preferujesz?", "stylPracy", "radio", new String[] {"biurowy", "fizyczny", "inny"});
+		update(w.o);
+end
+
+rule "slowo_opisujace"
+	salience 10
+	when o: Osoba( czyAtrybutJest("slowoOpisujace") )
+	then
+		Window w = new Window(o, "Wybierz lepiej opisujace cie slowo:", "slowoOpisujace", "check", new String[] {"uczuciowy", "silny", "niezalezny"});
+		update(w.o);
+end
+
+rule "jezyki_obce"
+	salience 10
+	when o: Osoba( czyAtrybutJest("jezykiObce") )
+	then
+		Window w = new Window(o, "Ile znasz jezykow obcych?", "jezykiObce", "radio", new String[] {"0", "1", "2 lub wiecej"});
+		update(w.o);
+end
+
+
+rule "wyksztalcenie"
+	salience 9
+	when o: Osoba( czyAtrybutJest("wyksztalcenie") )
+	then      
+		Window w = new Window(o, "Jakie masz wyksztalcenie?", "wyksztalcenie", "radio" , new String[] {"podstawowe", "srednie", "zawodowe", "wyzsze"});
+		update(w.o);
+end
+
+rule "stres"
+	salience 10
+	when o: Osoba( czyAtrybutJest("stres") )
+	then
+		Window w = new Window(o, "Czy dobrze radzisz sobie ze stresem?", "stres", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+//warunkowe:
+
+rule "pieniadze"
+	salience 10
+	when o: Osoba( czyAtrybutJest("pieniadze") && czyArgumentJest("dzialalnosc", "tak") )
+	then
+		Window w = new Window(o, "Czy mozesz zainwestowac pieniadze?", "pieniadze", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end 
+
+rule "zylka_handlowca"
+	salience 10
+	when o: Osoba( czyAtrybutJest("zylka_handlowca") && czyArgumentJest("stylPracy", "inny") )
+	then
+		Window w = new Window(o, "Czy masz zylke handlowca?", "zylka_handlowca", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end 
+
+rule "dzieci"
+	salience 10
+	when o: Osoba( czyAtrybutJest("dzieci") && czyArgumentJest("stylPracy", "inny") )
+	then
+		Window w = new Window(o, "Czy lubisz pracowac z dziecmi?", "dzieci", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "dzialalnosc"
+	salience 10
+	//when o: Osoba( czyAtrybutJest("dzialalnosc") && (czyArgumentJest("stylPracy", "biurowy") || czyArgumentJest("stylPracy", "inny")))
+	when o: Osoba( czyAtrybutJest("dzialalnosc") )
+	then
+		Window w = new Window(o, "Czy chcesz otworzyc wlasna dzialalnosc?", "dzialalnosc", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "programowanie"
+	salience 10
+	when o: Osoba( czyAtrybutJest("programowanie") && (czyArgumentJest("stylPracy", "biurowy") || czyArgumentJest("stylPracy", "inny")))
+	then
+		Window w = new Window(o, "Czy znasz w stopniu conajmniej dobrym jakis jezyk programowania?", "programowanie", "radio",  new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "kolej"
+	salience 10
+	when o: Osoba ( czyAtrybutJest("kolej") && czyArgumentJest("stylPracy", "inny"))
+	then 
+		Window w = new Window(o, "Czy lubisz jezdzic koleja?", "kolej", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "zdomu"
+	salience 10
+	when o: Osoba( czyAtrybutJest("dom") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("programowanie", "tak"))
+	then
+		Window w = new Window(o, "Czy chcesz pracowac z domu?", "dom", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "zainteresowanie_elektronika"
+	salience 10
+	when o: Osoba( czyAtrybutJest("elektronika") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("programowanie", "tak") && czyArgumentJest("dom","nie"))
+	then
+		Window w = new Window(o, "Czy lubisz obcowac z elektronika?", "elektronika", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "doswiadczenie"
+	salience 10
+	when o: Osoba( czyAtrybutJest("doswiadczenie") && czyArgumentJest("stylPracy", "inny") )
+	then
+		Window w = new Window(o, "Czy masz doswiadczenie w ktorejs z ponizszych dziedzin?", "doswiadczenie", "check", new String [] {"w zadnej z ponizszych", "budownictwo", "informatyka", "prace biurowe", "gotowanie"});
+		update(w.o);
+end
+
+rule "empatia"
+	salience 10
+	when o: Osoba( czyAtrybutJest("empatia") && czyArgumentJest("slowoOpisujace", "uczuciowy") )
+	then
+		Window w = new Window(o, "Czy posiadasz empatie?", "empatia", "radio", new String [] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "wyksztalcenie_medyczne"
+	salience 10
+	when o: Osoba( czyAtrybutJest("wykMedyczne") && czyArgumentJest("stylPracy", "inny") )
+	then
+		Window w = new Window(o, "Czy masz jakies doswiadczenie medyczne?", "wykMedyczne", "radio", new String [] {"nie", "podstawowe", "srednie", "wyzsze"});
+		update(w.o);
+end
+
+rule "sprawnosc_fizyczna"
+	salience 10
+	when o: Osoba( czyAtrybutJest("sprawnoscFizyczna") && (czyArgumentJest("stylPracy", "fizyczny") || czyArgumentJest("stylPracy", "inny") || czyArgumentJest("doswiadczenie", "budownictwo")) )
+	then
+		Window w = new Window(o, "Czy jestes sprawny fizycznie?", "sprawnoscFizyczna", "radio", new String [] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "karany"
+	salience 10
+	when o: Osoba( czyAtrybutJest("karany") && czyArgumentJest("stylPracy", "fizyczny") )
+	then
+		Window w = new Window(o, "Czy byles kiedykolwiek karany?", "karany", "radio", new String [] {"tak", "nie"});
+end
+
+rule "sluzba_ojczyznie"
+	salience 10
+	when o: Osoba( czyAtrybutJest("sluzbaOjczyznie") && czyArgumentJest("stylPracy", "fizyczny") )
+	then
+		Window w = new Window(o, "Czy chcesz sluzyc ojczyznie?", "sluzbaOjczyznie", "radio", new String [] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "trudne_warunki"
+	salience 10
+	when o: Osoba( czyAtrybutJest("trudneWarunki") && (czyArgumentJest("stylPracy", "inny") || czyArgumentJest("stylPracy", "fizyczny")) && czyArgumentJest("sprawnoscFizyczna", "tak") )
+	then
+		Window w = new Window(o, "Czy jestes gotowy, aby pracowac w warunkach zagrazajacych twojemu zyciu?", "trudneWarunki", "radio", new String [] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "rachunkowosc"
+	salience 10
+	when o: Osoba( czyAtrybutJest("rachunkowosc") && czyArgumentJest("doswiadczenie", "prace biurowe"))
+	then
+		Window w = new Window(o, "Czy znasz sie na rachunkowosci?", "rachunkowosc", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "kontakt"
+	salience 10
+	when o: Osoba( czyAtrybutJest("kontakt") && czyArgumentJest("slowoOpisujace", "uczuciowy") && czyArgumentJest("stylPracy", "inny") )
+	then
+		Window w = new Window(o, "Czy masz dobry kontakt z innymi ludzmi?", "kontakt", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "wyksztalcenie_prawnicze"
+	salience 10
+	when o: Osoba( czyAtrybutJest("wykPrawnicze") && ( czyArgumentJest("stylPracy", "biurowy") || czyArgumentJest("doswiadczenie", "prace biurowe") ) )
+	then
+		Window w = new Window(o, "Czy masz wyksztalcenie prawnicze?", "wykPrawnicze", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "wiedza"
+	salience 10
+	when o: Osoba( czyAtrybutJest("wiedza") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("dzieci", "tak"))
+	then
+		Window w = new Window(o, "Czy umiesz przekazywac wiedze?", "wiedza", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "majsterkowanie"
+	salience 10
+	when o: Osoba( czyAtrybutJest("majsterkowanie") && czyArgumentJest("stylPracy", "fizyczny"))
+	then
+		Window w = new Window(o, "Czy umiesz majsterkowac?", "majsterkowanie", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "wyjazdy"
+	salience 10
+	when o: Osoba( czyAtrybutJest("wyjazdy") && ((czyArgumentJest("prawoJazdy", "B") || czyArgumentJest("prawoJazdy", "C+E")) || czyArgumentJest("stylPracy", "inny")))
+	then
+		Window w = new Window(o, "Czy jestes gotowy na wyjazdy?", "wyjazdy", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+rule "pobrudzic"
+	salience 10
+	when o: Osoba( czyAtrybutJest("pobrudzic") && czyArgumentJest("stylPracy", "fizyczny") )
+	then
+		Window w = new Window(o, "Czy nie boisz sie pobrudzic?", "pobrudzic", "radio", new String[] {"tak", "nie"});
+		update(w.o);
+end
+
+//Wynikowe:
+
+rule "wynik_wlasciciel_sklepu"
+	salience 1
+	when o: Osoba( czyArgumentJest("zylka_handlowca", "tak") && czyArgumentJest("dzialalnosc", "tak") && czyArgumentJest("pieniadze", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to wlasciciel sklepu!");
+end
+
+rule "wynik_sprzedawca"
+	salience 1
+	when o: Osoba( (czyArgumentJest("stylPracy", "fizyczny") || czyArgumentJest("stylPracy", "inny")) && czyArgumentJest("zylka_handlowca", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to sprzedawca!");
+end
+
+rule "wynik_dostawca_pizzy"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "fizyczny") && czyArgumentJest("prawoJazdy", "A") && czyArgumentJest("wyksztalcenie", "podstawowe" ))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to dostawca pizzy!");
+end
+
+rule "wynik_kierowca_tira"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "fizyczny") && czyArgumentJest("prawoJazdy", "C+E") && czyArgumentJest("wyksztalcenie", "podstawowe" ) && czyArgumentJest("wyjazdy", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to kierowca tira!");
+end
+
+rule "wynik_dostawca"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "fizyczny") && czyArgumentJest("prawoJazdy", "B") && czyArgumentJest("wyksztalcenie", "podstawowe" ) && czyArgumentJest("wyjazdy", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to dostawca towarow!");
+end
+
+rule "wynik_pielegniarka"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "inny") && (czyArgumentJest("wykMedyczne", "podstawowe") || czyArgumentJest("wykMedyczne", "srednie")) && czyArgumentJest("empatia", "tak") && czyArgumentJest("kontakt", "tak")) 
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to pielegniarka!");
+end
+
+rule "wynik_lekarz"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "inny") && czyArgumentJest("wykMedyczne", "wyzsze") )
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to lekarz!");
+end
+
+rule "wynik_budowlaniec"
+	salience 1
+	when o: Osoba( czyArgumentJest("sprawnoscFizyczna", "tak") && czyArgumentJest("stylPracy", "fizyczny") && czyArgumentJest("dom", "nie") && czyArgumentJest("stres", "nie") && czyArgumentJest("wyksztalcenie", "podstawowe" ) && czyArgumentJest("doswiadczenie", "budowlane"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to pracownik budowy!");
+end
+
+rule "wynik_przedszkolanka"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "wyzsze") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("dzieci", "tak") && czyArgumentJest("empatia", "tak"))
+	then
+		new FinalWindow("Zawod wbrany dla ciebie to przedszkolanka!");
+end
+
+rule "wynik_zolnierz"
+	salience 1
+	when o: Osoba( czyArgumentJest("stres", "tak") && (czyArgumentJest("slowoOpisujace", "silny") || czyArgumentJest("slowoOpisujace", "niezalezny")) && czyArgumentJest("sprawnoscFizyczna", "tak") && czyArgumentJest("sluzbaOjczyznie", "tak") && czyArgumentJest("trudneWarunki", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to zolnierz!");
+end
+
+rule "wynik_policjant"
+	salience 1
+	when o: Osoba( (czyArgumentJest("slowoOpisujace", "silny") || czyArgumentJest("slowoOpisujace", "niezalezny")) && czyArgumentJest("sprawnoscFizyczna", "tak") && czyArgumentJest("sluzbaOjczyznie", "tak") && czyArgumentJest("karany", "nie") )
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to policjant!");
+end
+
+rule "wynik_strazak"
+	salience 1
+	when o: Osoba( czyArgumentJest("stres", "tak") && (czyArgumentJest("slowoOpisujace", "silny") || czyArgumentJest("slowoOpisujace", "niezalezny")) && czyArgumentJest("sprawnoscFizyczna", "tak") && czyArgumentJest("trudneWarunki", "tak") )
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to strazak!");
+end
+
+rule "wynik_kucharz"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "zawodowe") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("doswiadczenie", "gotowanie") )
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to kucharz!");
+end
+
+rule "wynik_ksiegowy"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "wyzsze") && czyArgumentJest("doswiadczenie", "prace biurowe") && czyArgumentJest("dom", "tak") && czyArgumentJest("rachunkowosc", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to ksiegowy!");
+end
+
+rule "wynik_prawnik"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "wyzsze") && czyArgumentJest("karany", "nie") && czyArgumentJest("kontakt", "tak") && czyArgumentJest("wykPrawnicze", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to prawnik!");
+end
+
+rule "wynik_elektronik"
+	salience 1
+	when o: Osoba( czyArgumentJest("stylPracy", "inny") && czyArgumentJest("elektronika", "tak") && czyArgumentJest("doswiadczenie", "informatyka"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to elektronik!");
+end
+
+rule "wynik_programista"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "wyzsze") && czyArgumentJest("stylPracy", "biurowy") && czyArgumentJest("programowanie", "tak") && (czyArgumentJest("jezykiObce","1") || czyArgumentJest("jezykiObce", "2 lub wiecej")))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to programista!");
+end
+
+rule "wynik_nauczyciel"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyksztalcenie", "wyzsze") && (czyArgumentJest("jezykiObce","1") || czyArgumentJest("jezykiObce", "2 lub wiecej")) && czyArgumentJest("kontakt", "tak") && czyArgumentJest("wiedza", "tak"))
+	then 
+		new FinalWindow("Zawod wybrany dla ciebie to nauczyciel!");
+end
+
+rule "wynik_hydraulik"
+	salience 1
+	when o: Osoba( (czyArgumentJest("wyksztalcenie", "zawodowe") || czyArgumentJest("wyksztalcenie", "podstawowe")) && czyArgumentJest("dzialalnosc", "tak") && czyArgumentJest("pobrudzic", "nie") && czyArgumentJest("majsterkowanie", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to hydraulik!");
+end
+
+rule "wynik_konduktor"
+	salience 1
+	when o: Osoba( czyArgumentJest("wyjazdy", "tak") && czyArgumentJest("stres","tak") && czyArgumentJest("stylPracy", "inny") && czyArgumentJest("kolej", "tak"))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to konduktor!");
+end
+
+rule "wynik_tlumacz"
+	salience 1
+	when o: Osoba( (czyArgumentJest("jezykiObce","1") || czyArgumentJest("jezykiObce", "2 lub wiecej")) && czyArgumentJest("wyjazdy", "tak") && (czyArgumentJest("stylPracy", "biurowy") || czyArgumentJest("stylPracy", "inny")))
+	then
+		new FinalWindow("Zawod wybrany dla ciebie to tlumacz!");
+end 
+
+rule "void"
+	salience 1
+	when o: Osoba()
+	then
+		new FinalWindow("Nie znaleziono zawodu dla ciebie.");
+end 
