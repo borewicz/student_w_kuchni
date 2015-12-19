@@ -24,8 +24,8 @@ public class DroolsTest {
             StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
             KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
             // go !
-            Osoba osoba = new Osoba();
-            ksession.insert(osoba);
+            Dish dish = new Dish();
+            ksession.insert(dish);
             ksession.fireAllRules();
             logger.close();
         } catch (Throwable t) {
