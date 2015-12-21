@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.Semaphore;
@@ -36,13 +35,12 @@ public class FinalWindow extends JFrame implements ActionListener{
         add(potwierdzButton);
 		
 		setSize(400, 100);
-        setTitle("Twój zawód.");
+        setTitle("G³odny student, smutny student.");
         setVisible(true);
-        
+        setLocationRelativeTo(null);
         try {
 			sem.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

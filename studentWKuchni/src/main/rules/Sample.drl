@@ -8,6 +8,7 @@ import java.util.Map;
 import com.sample.Dish;
 import com.sample.Window;
 import com.sample.FinalWindow;
+import com.sample.Updater;
 
 
 rule "skladniki"
@@ -25,23 +26,6 @@ rule "skladniki"
 		update(w.d);
 end 
 
-
-rule "pora"
-	salience 10
-	when d: Dish( !attributeExist("pora") )
-	then
-		Window w = new Window(d, "Co chcesz zjeœæ?", "pora", "radio", new String[] {"œniadanie", "obiad", "kolacje"});
-		update(w.d);
-end
-
-rule "cieplo_zimno"
-	salience 10
-	when d: Dish( !attributeExist("cieplo_zimno") )
-	then
-		Window w = new Window(d, "Chcesz danie na ciep³o czy na zimno?", "cieplo_zimno", "radio", new String[] {"ciep³o", "zimno"});
-		update(w.d);
-end
-
 rule "smak"
 	salience 10
 	when d: Dish( !attributeExist("smak") )
@@ -50,27 +34,58 @@ rule "smak"
 		update(w.d);
 end
 
-rule "sprzet"
+rule "czas" 
 	salience 10
-	when d: Dish( !attributeExist("sprzet") )
+	when d: Dish( !attributeExist("czas") )
 	then
-		Window w = new Window(d, "Co z wymienionych rzeczy masz do dyspozycji?", "sprzet", "check", 
-		new String[] {"kuchenka", "grill", "piekarnik", "mikrofalówka", "garnek", "patelnia",
-		"toster"});
+		Window w = new Window(d, "Ile masz czasu na przygotowanie posi³ku?", "czas", "radio",
+		new String[] {"0 min", "10 min", "20 min","30 min", "60 min", "wiêcej"});
 		update(w.d);
 end
 
-
-//warunkowe:
-
-rule "pieniadze"
+rule "sprzet"
 	salience 10
-	when d: Dish( attributeExist("pieniadze") && attributeContain("dzialalnosc", "tak") )
+	when d: Dish( !attributeExist("sprzet") && !attributeContain("czas", "0 min") && attributeExist("czas") && attributeContain("cieplo_zimno","ciep³o") )
 	then
-		Window w = new Window(d, "Czy mozesz zainwestowac pieniadze?", "pieniadze", "radio", new String[] {"tak", "nie"});
+		Window w = new Window(d, "Co z wymienionych rzeczy masz do dyspozycji?", "sprzet", "check", 
+		new String[] {"kuchenka", "grill", "piekarnik", "mikrofalówka", "garnek", "patelnia",
+		"toster", "czajnik"});
 		update(w.d);
-end 
+end
 
+rule "cieplo_zimno"
+	salience 10
+	when d: Dish( !attributeExist("cieplo_zimno") && !attributeContain("czas", "0 min") && attributeExist("czas"))
+	then
+		Window w = new Window(d, "Chcesz danie na ciep³o czy na zimno?", "cieplo_zimno", "radio", new String[] {"ciep³o", "zimno"});
+		update(w.d);
+end
+
+rule "cieplo_zimno_brak_czasu"
+	salience 10
+	when d: Dish( !attributeExist("cieplo_zimno") && attributeContain("czas", "0 min"))
+	then
+		Updater u = new Updater(d, "cieplo_zimno", new String[] {"ciep³o"});		
+		update(u.d);
+end
+
+rule "wegetarianskie"
+	salience 10
+	when d: Dish( !attributeExist("wegetarianskie") && attributeExist("skladniki") && 
+	(attributeContain("skladniki", "kie³basa") || attributeContain("skladniki", "miêso") || attributeContain("skladniki", "miêso mielone") ||
+	attributeContain("skladniki", "parówki") || attributeContain("skladniki", "pasztet")))
+	then
+		Window w = new Window(d, "Czy danie musi byæ wegetariañskie?", "wegetarianskie", "radio", new String[] {"tak", "nie"});
+		update(w.d);
+end
+
+rule "zmywanie"
+	salience 10
+	when d: Dish( !attributeExist("zmywanie") && !attributeContain("czas", "0 min") && attributeExist("czas"))
+	then
+		Window w = new Window(d, "Czy mo¿e byæ du¿o naczyæ do zmywania po posi³ku?", "zmywanie", "radio", new String[] {"tak", "nie"});
+		update(w.d);
+end
 //Wynikowe:
 
 rule "wynik_wlasciciel_sklepu"
@@ -85,5 +100,5 @@ rule "void"
 	salience 1
 	when d: Dish()
 	then
-		new FinalWindow("Nie znaleziono zawodu dla ciebie.");
+		new FinalWindow("Niestety pozostaje Ci tylko \"Jajecznica studencka\".");
 end 
