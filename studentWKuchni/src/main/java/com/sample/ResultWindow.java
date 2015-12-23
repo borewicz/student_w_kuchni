@@ -56,6 +56,10 @@ public class ResultWindow extends JFrame implements ActionListener {
 		label1.setBorder(empty);
 		add(label1);
 
+		JLabel label2 = new JLabel(buttonQuestion);
+		label2.setBorder(empty);
+		add(label2);
+		
 		add(new JPanel());
 
 		JPanel buttonArea = new JPanel(new FlowLayout());
@@ -95,12 +99,12 @@ public class ResultWindow extends JFrame implements ActionListener {
 			System.exit(0);
 		}
 		if (source == falseButton) {
-			if (d.attributeExist("result")) {
-				d.attributes.get("result").add(this.result);
+			if (d.attributeExist("danie")) {
+				d.attributes.get("danie").add(this.result);
 			} else {
 				HashSet<String> attributesSet = new HashSet<String>();				
 				attributesSet.add(this.result);
-				d.attributes.put("result", attributesSet);
+				d.attributes.put("danie", attributesSet);
 			}
 			setVisible(false);
 			dataAvailable.release();

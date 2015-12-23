@@ -107,7 +107,7 @@ rule "bogato"
 	salience 10
 	when d: Dish( !attributeExist("bogato") && attributeContain("pic_jesc", "jeœæ"))
 	then
-		Window w = new Window(d, "Dzisiaj na bogato, czy bieda?", "bogato", "radio", new String[] {"tak, na bogato", "bieda"});
+		Window w = new Window(d, "Dzisiaj na bogato, czy bieda?", "bogato", "radio", new String[] {"tak, na bogato", "bieda"});		
 		update(w.d);
 end
 
@@ -115,13 +115,13 @@ end
 
 rule "frytki"
 	salience 10
-	when d: Dish( attributeContain("skladniki", "ziemniaki") && attributeContain("skladniki", "olej") && 
-	(attributeContain("sprzet", "frytkownica") || attributeContain("sprzet", "patelnia")) && attributeContain("cieplo_zimno", "cieplo") && 
-	(attributeContain("glodny", "bardzo") || attributeContain("glodny", "œrednio")) && attributeContain("zmywanie", "tak") &&
-	(attributeContain("czas", "30 min") || attributeContain("czas", "60 min") || attributeContain("czas", "wiêcej")) && 
-	attributeContain("pic_jesc", "jeœæ") && attributeContain("smak", "s³ony") )
+	when d: Dish( !attributeContain("danie","frytki") && attributeContain("skladniki", "ziemniaki") && attributeContain("skladniki", "olej")
+				&& (attributeContain("sprzet", "frytkownica") || attributeContain("sprzet", "patelnia")) && attributeContain("cieplo_zimno", "ciep³o")
+				&& (attributeContain("glodny", "bardzo") || attributeContain("glodny", "œrednio")) && attributeContain("zmywanie", "tak") &&
+				(attributeContain("czas", "30 min") || attributeContain("czas", "60 min") || attributeContain("czas", "wiêcej")) && 
+				attributeContain("pic_jesc", "jeœæ") && attributeContain("smak", "s³ony"))
 	then
-		new ResultWindow(Dish d, "frytki", "Proponujemy frytki ", "Czy odpowida Ci to danie?");
+		new ResultWindow(d, "frytki", "Proponujemy frytki ", "Czy odpowida Ci to danie?");
 end
 
 
