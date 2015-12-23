@@ -1,6 +1,6 @@
 package com.sample;
 
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,9 +21,9 @@ public class FinalWindow extends JFrame implements ActionListener{
 	
 	public FinalWindow (String decyzja){
 		
-		setLayout(new GridLayout(0,1));
+		setLayout(new FlowLayout());
 		
-		Border empty = new EmptyBorder(0, 20, 0, 0);
+		Border empty = new EmptyBorder(30, 1000, 60, 1000);
 			
 		JLabel label1 = new JLabel(decyzja);
 		label1.setBorder(empty);
@@ -34,7 +34,8 @@ public class FinalWindow extends JFrame implements ActionListener{
         
         add(potwierdzButton);
 		
-		setSize(400, 100);
+		setSize(400, 200);
+		setResizable(false);
         setTitle("G³odny student, smutny student.");
         setVisible(true);
         setLocationRelativeTo(null);

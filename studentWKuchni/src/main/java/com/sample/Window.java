@@ -56,7 +56,7 @@ public class Window extends JFrame implements ActionListener {
 
 		int windowWidth = 600;
 		int windowHeight = 400;
-		Border empty = new EmptyBorder(10, 200, 20, 200);
+		Border empty = new EmptyBorder(10, 600, 20, 600);
 
 		JLabel label1 = new JLabel(question);
 		label1.setBorder(empty);
@@ -106,6 +106,7 @@ public class Window extends JFrame implements ActionListener {
 		add(buttonArea);
 
 		setVisible(true);
+		setResizable(false);
 		setLayout(new FlowLayout());
 		setSize(windowWidth, windowHeight);
 		setTitle("Student w Kuchni");
