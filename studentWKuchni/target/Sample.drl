@@ -38,7 +38,7 @@ rule "smak"
 	salience 10
 	when d: Dish( !attributeExist("smak") )
 	then
-		Window w = new Window(d, "Jaki smak preferujesz?", "smak", "radio", new String[] {"s³odki", "s³ony", "gorzki","kwaœny"});
+		Window w = new Window(d, "Jaki smak preferujesz?", "smak", "check", new String[] {"s³odki", "wytrawny", "s³ony", "gorzki","kwaœny"});
 		update(w.d);
 end
 
@@ -145,7 +145,31 @@ rule "bigos"
 	then
 		new ResultWindow(d, "bigos", "Widzê, ¿e mo¿emy dzisiaj zaszaleæ. Bigos!!! Coœ pysznego :3 ", "Pasuje?");
 end
-	
+
+rule "ziemniaki_ze_smietana"
+	salience 10
+	when d: Dish( !attributeContain("danie","ziemniaki_ze_smietana") && attributeContain("skladniki","œmietana") && attributeContain("skladniki","ziemniaki")
+	&& attributeContain("pic_jesc","jeœæ") && (attributeContain("smak","s³ony") || attributeContain("smak","wytrawny")) && (attributeContain("czas","30 min") || 
+	attributeContain("czas","60 min") || attributeContain("czas","wiêcej")) && attributeContain("sprzet","kuchenka") && (attributeContain("sprzet","garnek") || 
+	attributeContain("sprzet","patelnia")) && attributeContain("zmywanie","tak") && attributeContain("bogato","bieda"))
+	then
+		new ResultWindow(d, "ziemniaki_ze_smietana", "No nie poszalejemy. Ziemniaki ze œmietan¹  ", "Pasuje?");
+end	
+
+rule "kanapki"
+	salience 10
+	when d: Dish( !attributeContain("danie","kanapki") && (attributeContain("skladniki","bagietka") || attributeContain("skladniki","bu³ka")
+	|| attributeContain("skladniki","chleb")) && (attributeContain("skladniki","cebula") || attributeContain("skladniki","d¿em") || attributeContain("skladniki","jajka")
+	|| attributeContain("skladniki","kie³basa") || attributeContain("skladniki","mas³o") || attributeContain("skladniki","miêso") || attributeContain("skladniki","miód")
+	|| attributeContain("skladniki","nutella") || attributeContain("skladniki","ogórek") || attributeContain("skladniki","papryka") || attributeContain("skladniki","parówki")
+	|| attributeContain("skladniki","pasztet") || attributeContain("skladniki","pieczarki") || attributeContain("skladniki","pomidor") || attributeContain("skladniki","ser pleœniowy")
+	|| attributeContain("skladniki","ser twarogowy") || attributeContain("skladniki","ser ¿ó³ty") || attributeContain("skladniki","szynka")) && 
+	attributeContain("pic_jesc","jeœæ") && (attributeContain("smak","s³odki") || attributeContain("smak","s³ony") || attributeContain("smak","wytrawny")) &&
+	(attributeContain("czas","10 min") || attributeContain("czas","30 min") || attributeContain("czas","60 min") || attributeContain("czas","wiêcej"))
+	&& (attributeContain("glodny","lekko") || attributeContain("glodny","œrednio")) && attributeContain("bogato","bieda"))
+	then
+		new ResultWindow(d, "kanapki", "Coœ tam siê znajdzie. Zrób sobie kanapki", "Mo¿e byæ?");
+end	
 
 
 rule "void"
