@@ -124,6 +124,29 @@ rule "frytki"
 		new ResultWindow(d, "frytki", "Proponujemy frytki ", "Czy odpowida Ci to danie?");
 end
 
+rule "hotdog"
+	salience 10
+	when d: Dish( !attributeContain("danie","hotdog") && attributeContain("skladniki","bagietka") && attributeContain("skladniki","parówki")
+		&& attributeContain("pic_jesc","jeœæ") && ( attributeContain("czas","10 min") || attributeContain("czas","30 min") || attributeContain("czas","60 min")
+		|| attributeContain("czas","wiêcej")) && attributeContain("sprzet","mikrofalówka") && attributeContain("cieplo_zimno","ciep³o") && 
+		attributeContain("wegetarianskie","nie") && attributeContain("glodny","lekko") && attributeContain("bogato","bieda"))
+	then
+		new ResultWindow(d, "hotdog", "Hot Dog bêdzie dobrym wyborem. Mówiesz, ¿e bieda wiêc z sam¹ bulk¹ i parówk¹ xD", "Jesteœ Za?");
+end
+
+rule "bigos"
+	salience 10
+	when d: Dish( !attributeContain("danie","bigos") && attributeContain("skladniki","cebula") && (attributeContain("skladniki","kapusta") 
+		|| attributeContain("skladniki","kapusta kiszona")) && attributeContain("skladniki","kie³basa") && attributeContain("skladniki","miêso")
+		&& attributeContain("skladniki","olej") && attributeContain("pic_jesc","jeœæ") && attributeContain("smak","kwaœny") &&
+		(attributeContain("czas","60 min") || attributeContain("czas","wiêcej")) && attributeContain("sprzet","kuchenka") && attributeContain("sprzet","garnek")
+		&& attributeContain("sprzet","patelnia") && attributeContain("cieplo_zimno","ciep³o") && attributeContain("wegetarianskie","nie") && attributeContain("zmywanie","tak")
+		&& (attributeContain("glodny","œrednio") || attributeContain("glodny","bardzo")) && attributeContain("bogato","tak, na bogato"))
+	then
+		new ResultWindow(d, "bigos", "Widzê, ¿e mo¿emy dzisiaj zaszaleæ. Bigos!!! Coœ pysznego :3 ", "Pasuje?");
+end
+	
+
 
 rule "void"
 	salience 1
