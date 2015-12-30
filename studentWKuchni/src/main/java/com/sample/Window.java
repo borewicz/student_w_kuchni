@@ -97,7 +97,7 @@ public class Window extends JFrame implements ActionListener {
 		JPanel buttonArea = new JPanel(new FlowLayout());
 		buttonArea.add(new JPanel());
 
-		submitButton = new JButton("Potwierdü");
+		submitButton = new JButton("Potwierd≈∫");
 		submitButton.addActionListener(this);
 		buttonArea.add(submitButton);
 

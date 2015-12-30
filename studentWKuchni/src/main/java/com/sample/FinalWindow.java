@@ -29,14 +29,14 @@ public class FinalWindow extends JFrame implements ActionListener{
 		label1.setBorder(empty);
 		add(label1);
 		
-		potwierdzButton = new JButton("Potwierdü");
+		potwierdzButton = new JButton("Potwierd≈∫");
         potwierdzButton.addActionListener(this);
         
         add(potwierdzButton);
 		
 		setSize(400, 200);
 		setResizable(false);
-        setTitle("G≥odny student, smutny student.");
+        setTitle("G≈Çodny student, smutny student.");
         setVisible(true);
         setLocationRelativeTo(null);
         try {
