@@ -303,6 +303,28 @@ rule "jajecznica_z_kiełbasą"
         new ResultWindow(d, "jajecznica_z_kiełbasą", "A może jajecznica na sterydach? O ile nie szkoda Ci kiełbasy na takie cuda.", "Może być?");
 end
 
+rule "jajka_gotowane"
+    salience 10
+    when d: Dish(
+        !attributeContain("skladniki","jajka_gotowane") &&
+        attributeContain("skladniki","jajka") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","nie") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "jajka_gotowane", "Jajka gotowane. Musisz tylko trochę na nie poczekać xD", "Pasi?");
+end
+
+
 rule "void"
 	salience 1
 	when d: Dish()
