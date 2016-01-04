@@ -168,9 +168,140 @@ rule "kanapki"
 	(attributeContain("czas","10 min") || attributeContain("czas","30 min") || attributeContain("czas","60 min") || attributeContain("czas","więcej"))
 	&& (attributeContain("glodny","lekko") || attributeContain("glodny","średnio")) && attributeContain("bogato","bieda"))
 	then
-		new ResultWindow(d, "kanapki", "Coś tam się znajdzie. Zrób sobie kanapki", "Może być?");
+		new ResultWindow(d, "kanapki", "Coś tam się znajdzie. Zrób se kanapki ", "Może być?");
 end	
 
+//jedyna słuszna wygoda marki dziura w dupie iksde lol :----DDDDDDD
+
+rule "burger"
+    salience 10
+    when d: Dish (
+        !attributeContain("danie", "burger") &&
+        attributeContain("skladniki","bułka") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","ogórek") &&
+        attributeContain("skladniki","pomidor") &&
+        attributeContain("skladniki","ser żółty") &&
+        attributeContain("pic_jesc","jeść") &&
+        (attributeContain("smak","słodki") ||
+        attributeContain("smak","słony") ||
+        attributeContain("smak","wytrawny")) &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        (attributeContain("sprzet","piekarnik") ||
+        attributeContain("sprzet","mikrofalówka") ||
+        attributeContain("sprzet","patelnia")) &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","nie") &&
+        attributeContain("glodny","średnio") &&
+        (attributeContain("bogato","tak, na bogato") ||
+        attributeContain("bogato","bieda"))
+    )
+    then
+        new ResultWindow(d, "burger", "<freedom mode on> TYLKO BURGER <freedom mode off> ", "Gra gitara?");
+end
+
+rule "gołąbki"
+    salience 10
+    when d: Dish (
+        !attributeContain("danie", "gołąbki") &&
+        attributeContain("skladniki","cebula") &&
+        attributeContain("skladniki","kapusta") &&
+        (attributeContain("skladniki","kasza") ||
+        attributeContain("skladniki","ryż")) &&
+        attributeContain("skladniki","mięso mielone") &&
+        attributeContain("skladniki","pomidor") &&
+        attributeContain("pic_jesc","jeść") &&
+        (attributeContain("smak","słodki") ||
+        attributeContain("smak","słony")) &&
+        (attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "gołąbki", "Jak tak bardzo chce Ci się robi gołąbki, to jest to git opcja xD ", "Pasi?");
+end
+
+rule "herbata"
+    salience 10
+    when d: Dish(
+        !attributeContain("skladniki","herbata") &&
+        attributeContain("pic_jesc","pić") &&
+        (attributeContain("smak","słodki") ||
+        attributeContain("smak","gorzki")) &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","czajnik") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","nie") &&
+        attributeContain("glodny","lekko") &&
+        (attributeContain("bogato","tak, na bogato") ||
+        attributeContain("bogato","bieda")) // zawsze można mieć jakieś za over 9000 cebulionów
+    )
+    then
+        new ResultWindow(d, "herbata", "Proponuję herbatkę u Tadka, najlepszego komika wojennego ", "Czy lubisz Drozdę?");
+end
+
+rule "jajecznica"
+    salience 10
+    when d: Dish(
+        !attributeContain("skladniki","jajecznica") &&
+        attributeContain("skladniki","jajka") &&
+        (attributeContain("skladniki","masło") ||
+        attributeContain("skladniki","olej")) &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","tak") &&
+        attributeContain("zmywanie","tak") &&
+        (attributeContain("glodny","lekko") ||
+        attributeContain("glodny","średnio")) &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "jajecznica", "Zawsze możesz sobie zrobić też jajecznicę (chociaż ile można ją jeść...) ", "Nie zbrzydła Ci się?");
+end
+
+rule "jajecznica_z_kiełbasą"
+    salience 10
+    when d: Dish(
+        !attributeContain("skladniki","jajecznica_z_kiełbasą") &&
+        attributeContain("skladniki","jajka") &&
+        (attributeContain("skladniki","masło") ||
+        attributeContain("skladniki","olej")) &&
+        attributeContain("skladniki","kiełbasa") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","tak, na bogato")
+        )
+    then
+        new ResultWindow(d, "jajecznica_z_kiełbasą", "A może jajecznica na sterydach? O ile nie szkoda Ci kiełbasy na takie cuda.", "Może być?");
+end
 
 rule "void"
 	salience 1
