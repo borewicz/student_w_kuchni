@@ -123,63 +123,133 @@ end
 
 rule "frytki"
 	salience 10
-	when d: Dish( !attributeContain("danie","frytki") && attributeContain("skladniki", "ziemniaki") && attributeContain("skladniki", "olej")
-				&& (attributeContain("sprzet", "frytkownica") || attributeContain("sprzet", "patelnia")) && attributeContain("cieplo_zimno", "ciepło")
-				&& (attributeContain("glodny", "bardzo") || attributeContain("glodny", "średnio")) && attributeContain("zmywanie", "tak") &&
-				(attributeContain("czas", "30 min") || attributeContain("czas", "60 min") || attributeContain("czas", "więcej")) && 
-				attributeContain("pic_jesc", "jeść") && attributeContain("smak", "słony"))
+	when d: Dish( 
+	!attributeContain("danie","frytki") && 
+	attributeContain("skladniki", "ziemniaki") && 
+	attributeContain("skladniki", "olej") && 
+	(attributeContain("sprzet", "frytkownica") || 
+	attributeContain("sprzet", "patelnia")) && 
+	attributeContain("cieplo_zimno", "ciepło") && 
+	(attributeContain("glodny", "bardzo") || 
+	attributeContain("glodny", "średnio")) && 
+	attributeContain("zmywanie", "tak") &&
+	(attributeContain("czas", "30 min") || 
+	attributeContain("czas", "60 min") || 
+	attributeContain("czas", "więcej")) && 
+	attributeContain("pic_jesc", "jeść") && 
+	attributeContain("smak", "słony"))
 	then
 		new ResultWindow(d, "frytki", "Proponujemy frytki ", "Czy odpowida Ci to danie?");
 end
 
 rule "hotdog"
 	salience 10
-	when d: Dish( !attributeContain("danie","hotdog") && attributeContain("skladniki","bagietka") && attributeContain("skladniki","parówki")
-		&& attributeContain("pic_jesc","jeść") && ( attributeContain("czas","10 min") || attributeContain("czas","30 min") || attributeContain("czas","60 min")
-		|| attributeContain("czas","więcej")) && attributeContain("sprzet","mikrofalówka") && attributeContain("cieplo_zimno","ciepło") && 
-		attributeContain("wegetarianskie","nie") && attributeContain("glodny","lekko") && attributeContain("bogato","bieda"))
+	when d: Dish( 
+	!attributeContain("danie","hotdog") && 
+	attributeContain("skladniki","bagietka") && 
+	attributeContain("skladniki","parówki")	&& 
+	attributeContain("pic_jesc","jeść") && 
+	(attributeContain("czas","10 min") || 
+	attributeContain("czas","30 min") || 
+	attributeContain("czas","60 min") || 
+	attributeContain("czas","więcej")) && 
+	attributeContain("sprzet","mikrofalówka") && 
+	attributeContain("cieplo_zimno","ciepło") && 
+	attributeContain("wegetarianskie","nie") && 
+	attributeContain("glodny","lekko") && 
+	attributeContain("bogato","bieda"))
 	then
 		new ResultWindow(d, "hotdog", "Hot Dog będzie dobrym wyborem. Mówiesz, że bieda więc z samą bulką i parówką xD", "Jesteś Za?");
 end
 
 rule "bigos"
 	salience 10
-	when d: Dish( !attributeContain("danie","bigos") && attributeContain("skladniki","cebula") && (attributeContain("skladniki","kapusta") 
-		|| attributeContain("skladniki","kapusta kiszona")) && attributeContain("skladniki","kiełbasa") && attributeContain("skladniki","mięso")
-		&& attributeContain("skladniki","olej") && attributeContain("pic_jesc","jeść") && attributeContain("smak","kwaśny") &&
-		(attributeContain("czas","60 min") || attributeContain("czas","więcej")) && attributeContain("sprzet","kuchenka") && attributeContain("sprzet","garnek")
-		&& attributeContain("sprzet","patelnia") && attributeContain("cieplo_zimno","ciepło") && attributeContain("wegetarianskie","nie") && attributeContain("zmywanie","tak")
-		&& (attributeContain("glodny","średnio") || attributeContain("glodny","bardzo")) && attributeContain("bogato","tak, na bogato"))
+	when d: Dish( 
+	!attributeContain("danie","bigos") && 
+	attributeContain("skladniki","cebula") && 
+	(attributeContain("skladniki","kapusta") || 
+	attributeContain("skladniki","kapusta kiszona")) && 
+	attributeContain("skladniki","kiełbasa") && 
+	attributeContain("skladniki","mięso") && 
+	attributeContain("skladniki","olej") && 
+	attributeContain("pic_jesc","jeść") && 
+	attributeContain("smak","kwaśny") &&
+	(attributeContain("czas","60 min") || 
+	attributeContain("czas","więcej")) && 
+	attributeContain("sprzet","kuchenka") && 
+	attributeContain("sprzet","garnek")	&& 
+	attributeContain("sprzet","patelnia") && 
+	attributeContain("cieplo_zimno","ciepło") && 
+	attributeContain("wegetarianskie","nie") && 
+	attributeContain("zmywanie","tak") && 
+	(attributeContain("glodny","średnio") ||
+	attributeContain("glodny","bardzo")) && 
+	attributeContain("bogato","tak, na bogato"))
 	then
 		new ResultWindow(d, "bigos", "Widzę, że możemy dzisiaj zaszaleć. Bigos!!! Coś pysznego :3 ", "Pasuje?");
 end
 
 rule "ziemniaki_ze_smietana"
 	salience 10
-	when d: Dish( !attributeContain("danie","ziemniaki_ze_smietana") && attributeContain("skladniki","śmietana") && attributeContain("skladniki","ziemniaki")
-	&& attributeContain("pic_jesc","jeść") && (attributeContain("smak","słony") || attributeContain("smak","wytrawny")) && (attributeContain("czas","30 min") || 
-	attributeContain("czas","60 min") || attributeContain("czas","więcej")) && attributeContain("sprzet","kuchenka") && (attributeContain("sprzet","garnek") || 
-	attributeContain("sprzet","patelnia")) && attributeContain("zmywanie","tak") && attributeContain("bogato","bieda"))
+	when d: Dish( 
+	!attributeContain("danie","ziemniaki_ze_smietana") && 
+	attributeContain("skladniki","śmietana") && 
+	attributeContain("skladniki","ziemniaki")
+	&& attributeContain("pic_jesc","jeść") && 
+	(attributeContain("smak","słony") || 
+	attributeContain("smak","wytrawny")) && 
+	(attributeContain("czas","30 min") || 
+	attributeContain("czas","60 min") || 
+	attributeContain("czas","więcej")) && 
+	attributeContain("sprzet","kuchenka") && 
+	(attributeContain("sprzet","garnek") || 
+	attributeContain("sprzet","patelnia")) && 
+	attributeContain("zmywanie","tak") && 
+	attributeContain("bogato","bieda"))
 	then
 		new ResultWindow(d, "ziemniaki_ze_smietana", "No nie poszalejemy. Ziemniaki ze śmietaną  ", "Pasuje?");
 end	
 
 rule "kanapki"
 	salience 10
-	when d: Dish( !attributeContain("danie","kanapki") && (attributeContain("skladniki","bagietka") || attributeContain("skladniki","bułka")
-	|| attributeContain("skladniki","chleb")) && (attributeContain("skladniki","cebula") || attributeContain("skladniki","dżem") || attributeContain("skladniki","jajka")
-	|| attributeContain("skladniki","kiełbasa") || attributeContain("skladniki","masło") || attributeContain("skladniki","mięso") || attributeContain("skladniki","miód")
-	|| attributeContain("skladniki","nutella") || attributeContain("skladniki","ogórek") || attributeContain("skladniki","papryka") || attributeContain("skladniki","parówki")
-	|| attributeContain("skladniki","pasztet") || attributeContain("skladniki","pieczarki") || attributeContain("skladniki","pomidor") || attributeContain("skladniki","ser pleśniowy")
-	|| attributeContain("skladniki","ser twarogowy") || attributeContain("skladniki","ser żółty") || attributeContain("skladniki","szynka")) && 
-	attributeContain("pic_jesc","jeść") && (attributeContain("smak","słodki") || attributeContain("smak","słony") || attributeContain("smak","wytrawny")) &&
-	(attributeContain("czas","10 min") || attributeContain("czas","30 min") || attributeContain("czas","60 min") || attributeContain("czas","więcej"))
-	&& (attributeContain("glodny","lekko") || attributeContain("glodny","średnio")) && attributeContain("bogato","bieda"))
+	when d: Dish( 
+	!attributeContain("danie","kanapki") && 
+	(attributeContain("skladniki","bagietka") || 
+	attributeContain("skladniki","bułka") || 
+	attributeContain("skladniki","chleb")) && 
+	(attributeContain("skladniki","cebula") || 
+	attributeContain("skladniki","dżem") || 
+	attributeContain("skladniki","jajka") || 
+	attributeContain("skladniki","kiełbasa") || 
+	attributeContain("skladniki","masło") || 
+	attributeContain("skladniki","mięso") || 
+	attributeContain("skladniki","miód") || 
+	attributeContain("skladniki","nutella") || 
+	attributeContain("skladniki","ogórek") || 
+	attributeContain("skladniki","papryka") || 
+	attributeContain("skladniki","parówki")	|| 
+	attributeContain("skladniki","pasztet") || 
+	attributeContain("skladniki","pieczarki") || 
+	attributeContain("skladniki","pomidor") || 
+	attributeContain("skladniki","ser pleśniowy") || 
+	attributeContain("skladniki","ser twarogowy") || 
+	attributeContain("skladniki","ser żółty") || 
+	attributeContain("skladniki","szynka")) && 
+	attributeContain("pic_jesc","jeść") && 
+	(attributeContain("smak","słodki") || 
+	attributeContain("smak","słony") || 
+	attributeContain("smak","wytrawny")) &&
+	(attributeContain("czas","10 min") || 
+	attributeContain("czas","30 min") || 
+	attributeContain("czas","60 min") || 
+	attributeContain("czas","więcej")) && 
+	(attributeContain("glodny","lekko") || 
+	attributeContain("glodny","średnio")) && 
+	attributeContain("bogato","bieda"))
 	then
 		new ResultWindow(d, "kanapki", "Coś tam się znajdzie. Zrób se kanapki ", "Może być?");
 end	
 
-//jedyna słuszna wygoda marki dziura w dupie iksde lol :----DDDDDDD
 
 rule "burger"
     salience 10
@@ -660,7 +730,7 @@ rule "tosty"
         attributeContain("bogato","bieda")
     )
     then
-        new ResultWindow(d, "parówki_w_cieście_francuskim", "To na bogato, parówki w cieście francuskim :P", "Już Ci cieknie ślinka?");
+        new ResultWindow(d, "tosty", "Bogackie tosty czekają :P", "Już Ci cieknie ślinka?");
 end
 
 rule "bułka"
@@ -681,7 +751,7 @@ rule "bułka"
         attributeContain("bogato","bieda")
     )
     then
-        new ResultWindow(d, "bułka", "Jak serio krucho z kasą to szamaj suche bułki", "Ok?");
+        new ResultWindow(d, "bułka", "Jak serio krucho z kasą to szamaj suche bułki.", "OK?");
 end
 
 rule "mleko"
@@ -744,7 +814,7 @@ rule "herbata"
         attributeContain("bogato","bieda")) // zawsze można mieć jakieś za over 9000 cebulionów
     )
     then
-        new ResultWindow(d, "herbata", "Proponuję herbatkę u Tadka, najlepszego komika wojennego ", "Czy lubisz Drozdę?");
+        new ResultWindow(d, "herbata", "Proponuję herbatkę u Tadka, najlepszego komika wojennego :D", "Czy lubisz Drozdę?");
 end
 
 rule "woda"
@@ -805,6 +875,384 @@ rule "piwo"
     )
     then
         new ResultWindow(d, "piwo", "Zawsze jest dobra pora na hehe piwko :D", "Pijemy?!");
+end
+
+rule "kasza_z_miodem"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kasza_z_miodem") &&
+        attributeContain("skladniki","kasza") &&
+        attributeContain("skladniki","miód") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słodki") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","nie") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "kasza_z_miodem", "Jak into miód, zawsze możesz into biedacką kaszę z miodem :D", "Dasz radę to zjeść?");
+end
+
+rule "kiełbasa_gotowana"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kielbasa_gotowana") &&
+        attributeContain("skladniki","kiełbasa") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "kiełbasa_gotowana", "Na szybko możesz ugotować kiełbachę - o ile nie szkoda Ci jej na grilla.", "Dajesz soga?");
+end
+
+rule "kiełbasa_smażona"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kiełbasa_smażona") &&
+        attributeContain("skladniki","kiełbasa") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "kiełbasa_smażona", "Na szybko możesz kiełbachę wrzucić na patelnię - o ile nie szkoda Ci jej na grilla.", "Dajesz soga?");
+end
+
+rule "kiełbasa_smażona_z_cebulą"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kiełbasa_smażona") &&
+        attributeContain("skladniki","kiełbasa") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("skladniki","cebula") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "kiełbasa_smażona_z_cebulą", "Opcja semi-bieda - kiełbasa smażona z cebulą.", "Czy jesteś cebularzem?");
+end
+
+rule "kotlet_z_jajek"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kotlet_z_jajek") &&
+        attributeContain("skladniki","chleb") &&
+        attributeContain("skladniki","jajka") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","10 min") ||
+        attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","lekko") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "kotlet_z_jajek", "BIEDA ALERT - legendarny kotlet z jajek na podstawie przepisu by Tomasz Bieniek!", "Czy jesteś desperatem?");
+end
+
+rule "kotlet_z_kaszą"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kotlet_z_kaszą") &&
+        attributeContain("skladniki","kasza") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "kotlet_z_kaszą", "Wyczuwam bogactwo - kotlet z kaszą! Radzę ukryć przed współlokatorem :D", "Mam nadzieję, że pasuje?");
+end
+
+rule "kotlet_z_ryżem"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kotlet_z_ryżem") &&
+        attributeContain("skladniki","ryż") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "kotlet_z_ryżem", "Jedyny słuszny kotlet z ryżem xD", "Can into?");
+end
+
+rule "kotlet_z_ziemniakami"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","kotlet_z_ziemniakami") &&
+        attributeContain("skladniki","ziemniaki") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "kotlet_z_ziemniakami", "Trzeba obrac pyrki, ale poza tym to jest bogactwo xD", "Can into?");
+end
+
+rule "krokiety"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","krokiety") &&
+        attributeContain("skladniki","mąka") &&
+        attributeContain("skladniki","mleko") &&
+        attributeContain("skladniki","jajka") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("skladniki","kapusta kiszona") &&
+        attributeContain("skladniki","pieczarki") &&
+        attributeContain("pic_jesc","jeść") &&
+        (attributeContain("smak","słodki") ||
+        attributeContain("smak","słony")) &&
+        attributeContain("sprzet","kuchenka") &&
+        attributeContain("sprzet","patelnia") &&
+        (attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        (attributeContain("glodny","średnio") ||
+        attributeContain("glodny","bardzo")) &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "krokiety", "Krokiety :3 Tylko troche z tym jest roboty :(", "Chce Ci się?");
+end
+
+rule "leczo"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie", "leczo") &&
+        attributeContain("skladniki","cebula") &&
+        attributeContain("skladniki","kiełbasa") &&
+        attributeContain("skladniki","papryka") &&
+        attributeContain("skladniki","pomidor") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słodki") &&
+        attributeContain("smak","słony") &&
+        attributeContain("czas","60 min") &&
+        attributeContain("czas","więcej") &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        (attributeContain("glodny","średnio") ||
+        attributeContain("glodny","bardzo")) &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "leczo", "W ramach przyjaźni polsko-węgierskiej możesz sobie zrobić leczo xD", "Szanujesz Węgrów?");
+end
+
+rule "makaron_z_twarogiem"
+    salience 10
+    when d: Dish(
+        attributeContain("skladniki","makaron") &&
+        attributeContain("skladniki","ser twarogowy") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","średnio") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "makaron_z_twarogiem", "Jak Ci gnije ser w lodówce to jeszcze możesz zrobicz z niego użytek robiąc makaron z twarogiem", "Aprobujesz?");
+end
+
+rule "mielone_z_kaszą"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","mielone_z_kaszą") &&
+        attributeContain("skladniki","kasza") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "mielone_z_kaszą", "Wyczuwam bogactwo - mielone z kaszą! Radzę ukryć przed współlokatorem :D", "Mam nadzieję, że pasuje?");
+end
+
+rule "mielone_z_ryżem"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","mielone_z_ryżem") &&
+        attributeContain("skladniki","ryż") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "mielone_z_ryżem", "Jedyny słuszne mielone z ryżem xD", "Can into?");
+end
+
+rule "mielone_z_ziemniakami"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","mielone_z_ziemniakami") &&
+        attributeContain("skladniki","ziemniaki") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "mielone_z_ziemniakami", "Trzeba obrac pyrki, ale mielone z ziemniakami to jest bogactwo xD", "Can into?");
+end
+
+rule "mięso_w_piwie"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","mięso_w_piwie") &&
+        attributeContain("skladniki","piwo") &&
+        attributeContain("skladniki","mięso") &&
+        attributeContain("skladniki","olej") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","patelnia") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","tak, na bogato")
+    )
+    then
+        new ResultWindow(d, "mięso_w_piwie", "Jak Ci nie szkoda piwo, to mięso w piwie to jest całkiem niezła opcja.", "Nie szkoda Ci piwa?");
+end
+
+rule "zapiekanka"
+    salience 10
+    when d: Dish(
+        !attributeContain("danie","zapiekanka") &&
+        attributeContain("skladniki","bagietka") &&
+        attributeContain("skladniki","pieczarki") &&
+        attributeContain("skladniki","pomidor") &&
+        attributeContain("skladniki","ser żółty") &&
+        attributeContain("skladniki","szynka") &&
+        attributeContain("pic_jesc","jeść") &&
+        attributeContain("smak","słodki") &&
+        attributeContain("smak","słony") &&
+        (attributeContain("czas","30 min") ||
+        attributeContain("czas","60 min") ||
+        attributeContain("czas","więcej")) &&
+        attributeContain("sprzet","piekarnik") &&
+        attributeContain("sprzet","garnek") &&
+        attributeContain("cieplo_zimno","ciepło") &&
+        attributeContain("wegetarianskie","nie") &&
+        attributeContain("zmywanie","tak") &&
+        attributeContain("glodny","bardzo") &&
+        attributeContain("bogato","bieda")
+    )
+    then
+        new ResultWindow(d, "zapiekanka", "Biedacka zapiekanka zawsze na propsie :3", "Pasuje?");
 end
 
 rule "void"
